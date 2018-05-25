@@ -1,0 +1,21 @@
+<mat-toolbar class="header" color="primary">
+  <mat-icon class="logo" svgIcon="beluga"></mat-icon>
+  <span class="title">BELUGA</span>
+  <span class="version">v0.1</span>
+</mat-toolbar>
+
+<div class="error" *ngIf="apiStatus === 'disconnected'">
+  <mat-icon color="warn">error</mat-icon>
+  <div class="mat-h4">Info about the action</div>
+</div>
+
+<div class="spinner" *ngIf="apiStatus === 'waiting'">
+  <mat-progress-spinner color="accent" mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<mat-sidenav-container class="content">
+  <mat-sidenav mode="side" [(opened)]="opened">Sidenav content</mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

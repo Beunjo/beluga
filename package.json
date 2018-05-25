@@ -1,0 +1,17 @@
+{
+  "name": "beluga",
+  "version": "0.1.0",
+  "scripts": {
+    "build:api": "cpx api/**/* dist/api",
+    "build:client": "cd client && ng build --output-path --prod ../dist",
+    "build": "npm run build:client && npm run build:api",
+    "start:api": "nodemon api/server.js",
+    "start:client": "cd client && ng serve",
+    "start": "concurrently -n \"api,client\" -c \"yellow,green\" \"npm run start:api\" \"npm run start:client\""
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.17.5"
+  }
+}

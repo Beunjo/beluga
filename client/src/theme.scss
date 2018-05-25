@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+// Include the common styles for Angular Material.
+@include mat-core();
+
+// Define the default theme.
+// https://material.io/tools/color
+$app-primary: mat-palette($mat-teal);
+$app-accent:  mat-palette($mat-amber, 400);
+$app-warn:    mat-palette($mat-deep-orange);
+$app-theme:   mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// Include the default theme styles.
+@include angular-material-theme($app-theme);
