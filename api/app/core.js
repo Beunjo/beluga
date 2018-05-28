@@ -2,11 +2,14 @@ module.exports = function (io) {
     'use strict';
 
     //---
-    var logger = require('../logger.js');
-    var config = require('../config.json');
+    var promise = require('promise');
 
     //---
-    var promise = require('promise');
+    var logger = require('../logger.js');
+    var config = require('../config.json');
+    
+    var torrent = require('./torrent.js');
+
 
     //---
     var initComplete = false;
@@ -38,7 +41,42 @@ module.exports = function (io) {
     };
 
     //---
+    
+    var search = function (category, title, season, episode) {
+
+        logger.info("[core] search");
+        var promise = new Promise(function (resolve, reject) {
+            var results = torrent.search(category, title, season, episode);
+            
+            resolve(results);
+            /*t411.search(category, title, season, episode).then(
+                function (results) {
+                    return transmission.list().then(function (torrents) {
+
+                        results.forEach(function (result) {
+                            torrents.forEach(function (torrent) {
+                                if (torrent.t411 == result.id) {
+                                    result.torrent = torrent;
+                                    result.isDownloaded = true;
+                                    result.t411 = search.id;
+                                }
+                            });
+                        });
+
+                        resolve(results);
+                    });
+                },
+                function (err) {
+                    logger.error("[core] search failed", err);
+                    reject();
+                });*/
+        });
+
+        return promise;
+    };
+    //---
     return {
-        init: init
+        init: init,
+        search: search
     };
 };
